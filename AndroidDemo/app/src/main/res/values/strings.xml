@@ -36,6 +36,13 @@
     <string name="mock_server_has_token">Mock server has refresh token?</string>
     <string name="request_server_auth_code">Request server auth code?</string>
     <string name="configuration_error">Error: the value of WEB_CLIENT_ID or SERVER_BASE_URL is not  set correctly. This will cause errors when requesting a server auth code.</string>
+    <string name="title_activity_view_astream">ViewAStreamActivity</string>
+    <string name="title_activity_take_photo">TakePhotoActivity</string>
+    <string name="title_activity_view_nearby">ViewNearbyActivity</string>
+    <string name="title_activity_create_poi">CreatePOIActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

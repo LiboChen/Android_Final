@@ -1,13 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.aptPhase3.zhiyuan.android.DisplayImages">
+    tools:context="com.aptPhase3.zhiyuan.android.ViewNearbyActivity">
 
     <TextView
-        android:text="@string/imagePage"
+        android:text="View Nearby Streams"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -26,4 +27,5 @@
         android:stretchMode="columnWidth"
         android:gravity="center"
         />
+
 </LinearLayout>

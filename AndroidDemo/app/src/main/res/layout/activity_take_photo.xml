@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.aptPhase3.zhiyuan.android.TakePhotoActivity"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <SurfaceView android:id="@+id/surface_camera"
+
+        android:layout_width="fill_parent" android:layout_height="238dp"
+
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:layout_weight="0.83">
+
+    </SurfaceView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="351dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|left">
+
+        <Button
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:text="Use this Picture"
+            android:id="@+id/submite_button"
+            android:layout_gravity="left" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Take Photo"
+            android:id="@+id/Take_Pic_Button"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:layout_width="73dp"
+            android:layout_height="73dp"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal|right" />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
