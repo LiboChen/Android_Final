@@ -44,40 +44,6 @@ public class ChatActivity extends ActionBarActivity implements
     private GCMClientManager pushClientManager;
     String PROJECT_NUMBER = "";
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_chat);
-//
-//        new Thread(new Runnable() {
-//            public void run() {
-//
-//                pushClientManager = new GCMClientManager(activity, PROJECT_NUMBER);
-//                pushClientManager.registerIfNeeded(new GCMClientManager.RegistrationCompletedHandler() {
-//
-//                    @Override
-//                    public void onSuccess(String registrationId, boolean isNewRegistration) {
-//                        Toast.makeText(ChatActivity.this, registrationId,
-//                                Toast.LENGTH_SHORT).show();
-//                        // SEND async device registration to your back-end server
-//                        // linking user with device registration id
-//                        // POST https://my-back-end.com/devices/register?user_id=123&amp;amp;device_id=abc
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String ex) {
-//                        super.onFailure(ex);
-//                        // If there is an error registering, don&#039;t just keep trying to register.
-//                        // Require the user to click a button again, or perform
-//                        // exponential back-off when retrying.
-//                    }
-//                });
-//            }
-//        }).start();
-//
-//    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
