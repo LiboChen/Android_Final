@@ -76,6 +76,12 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="register"
+            android:id="@+id/buttonRegister" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Create Place of Interest"
             android:clickable="false"
             android:id="@+id/createPOI"/>

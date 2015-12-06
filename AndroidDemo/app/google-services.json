@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "aptphase3",
+    "project_number": "646073523562",
+    "name": "AptPhase3"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:646073523562:android:46bf994a4a333fe2",
+        "client_id": "android:com.aptPhase3.zhiyuan.android",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.aptPhase3.zhiyuan.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "646073523562-nhjsrii8vsnuo30tckl3tughlu098epp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aptPhase3.zhiyuan.android",
+            "certificate_hash": "8A488A9C5E664D1754B73D42E42BBBE97409AF3F"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

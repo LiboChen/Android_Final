@@ -85,6 +85,7 @@ public class Homepage extends ActionBarActivity implements
     private Button mRevokeButton;
     private Button mViewNearby;
     private Button mCreatePOI;
+    private Button mRegister;
     private TextView mStatus;
 
     // application
@@ -100,6 +101,7 @@ public class Homepage extends ActionBarActivity implements
 
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
         mSignOutButton = (Button) findViewById(R.id.sign_out_button);
+        mRegister = (Button) findViewById(R.id.buttonRegister);
         mRevokeButton = (Button) findViewById(R.id.revoke_access_button);
         mCreatePOI = (Button) findViewById(R.id.createPOI);
         mStatus = (TextView) findViewById(R.id.sign_in_status);
@@ -113,6 +115,7 @@ public class Homepage extends ActionBarActivity implements
         mSignOutButton.setOnClickListener(this);
         mRevokeButton.setOnClickListener(this);
         mCreatePOI.setOnClickListener(this);
+        mRegister.setOnClickListener(this);
 
         if (savedInstanceState != null) {
             mSignInProgress = savedInstanceState
@@ -225,6 +228,10 @@ public class Homepage extends ActionBarActivity implements
                 case R.id.createPOI:
                     Intent poiIntent = new Intent(context, CreatePOIActivity.class);
                     startActivity(poiIntent);
+                    break;
+                case R.id.buttonRegister:
+                    Intent registerIntent = new Intent(context, ChatActivity.class);
+                    startActivity(registerIntent);
                     break;
             }
         }
