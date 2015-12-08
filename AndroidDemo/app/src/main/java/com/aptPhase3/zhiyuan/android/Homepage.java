@@ -86,6 +86,8 @@ public class Homepage extends ActionBarActivity implements
     private Button mViewNearby;
     private Button mCreatePOI;
     private Button mRegister;
+    private Button mViewMyFriends;
+    private Button mViewMyProfile;
     private TextView mStatus;
 
     // application
@@ -106,7 +108,9 @@ public class Homepage extends ActionBarActivity implements
         mCreatePOI = (Button) findViewById(R.id.createPOI);
         mStatus = (TextView) findViewById(R.id.sign_in_status);
         mViewNearby = (Button) findViewById(R.id.View_Nearby);
-        mViewNearby.setClickable(false);
+        mViewMyFriends = (Button) findViewById(R.id.view_my_frineds);
+        mViewMyProfile = (Button) findViewById(R.id.view_my_profile);
+        //mViewNearby.setClickable(false);
 
         setGooglePlusButtonText(mSignInButton, "Sign in          ");
 
@@ -116,6 +120,9 @@ public class Homepage extends ActionBarActivity implements
         mRevokeButton.setOnClickListener(this);
         mCreatePOI.setOnClickListener(this);
         mRegister.setOnClickListener(this);
+        mViewNearby.setOnClickListener(this);
+        mViewMyFriends.setOnClickListener(this);
+        mViewMyProfile.setOnClickListener(this);
 
         if (savedInstanceState != null) {
             mSignInProgress = savedInstanceState
@@ -232,6 +239,14 @@ public class Homepage extends ActionBarActivity implements
                 case R.id.buttonRegister:
                     Intent registerIntent = new Intent(context, ChatActivity.class);
                     startActivity(registerIntent);
+                    break;
+                case R.id.view_my_frineds:
+                    Intent viewFriendIntent = new Intent(context, ViewFriends.class);
+                    startActivity(viewFriendIntent);
+                    break;
+                case R.id.view_my_profile:
+                    Intent viewProfileIntent = new Intent(context, ViewProfile.class);
+                    startActivity(viewProfileIntent);
                     break;
             }
         }

@@ -7,7 +7,7 @@
     tools:context="com.aptPhase3.zhiyuan.android.DisplayImages">
 
     <TextView
-        android:text="@string/imagePage"
+        android:text="All POIs"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

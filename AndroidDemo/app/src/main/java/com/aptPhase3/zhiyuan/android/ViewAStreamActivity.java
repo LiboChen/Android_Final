@@ -60,7 +60,7 @@ public class ViewAStreamActivity extends ActionBarActivity implements Connection
         takePhotoButton.setVisibility(View.INVISIBLE);
 
 
-        final String request_url = "http://apt-phase3.appspot.com/android/view_single_stream?user_id="+myApp.userName+"&stream_id="+stream_id;
+        final String request_url = myApp.back_end +"android/view_single_stream?user_id="+myApp.userName+"&stream_id="+stream_id;
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.get(request_url, new AsyncHttpResponseHandler() {
             @Override

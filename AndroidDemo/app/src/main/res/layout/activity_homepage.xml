@@ -4,13 +4,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:scrollbars="vertical"
-    >
+    android:fillViewport="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".Homepage">
+        tools:context=".Homepage"
+        android:weightSum="1">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -50,13 +51,29 @@
             android:text="@string/status_signed_out" />
 
         <TextView
-            android:text="@string/welcome"
+            android:text="Tour Mate"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="40sp"
             android:paddingBottom = "40sp"
             />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View my profile"
+            android:clickable="false"
+            android:id="@+id/view_my_profile"
+            android:layout_weight="2.45" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Place of Interest"
+            android:clickable="false"
+            android:id="@+id/createPOI"
+            android:layout_weight="2.45" />
 
         <Button
             android:id="@+id/view_all_images"
@@ -76,15 +93,15 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="register"
-            android:id="@+id/buttonRegister" />
+            android:text="View My Friends"
+            android:id="@+id/view_my_frineds"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create Place of Interest"
-            android:clickable="false"
-            android:id="@+id/createPOI"/>
+            android:text="register"
+            android:id="@+id/buttonRegister" />
 
     </LinearLayout>
 </ScrollView>
