@@ -1,6 +1,7 @@
 package com.aptPhase3.zhiyuan.android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -30,41 +31,50 @@ import android.graphics.BitmapFactory;
 import java.net.URL;
 import java.io.IOException;
 import android.os.AsyncTask;
+import android.widget.Button;
+import android.widget.Toast;
 
-public class ViewProfile extends ActionBarActivity {
+
+public class ViewProfile extends ActionBarActivity implements View.OnClickListener {
     Context context = this;
     private String TAG  = "View Profile";
     protected MyApplication myApp;
     private View.OnClickListener listener;
+    private Button mEditProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-        TextView nickName = (TextView) findViewById(R.id.nick_name);
-        TextView description = (TextView) findViewById(R.id.description);
+        listener = this;
+        mEditProfile = (Button) findViewById(R.id.edit_profile);
+        //mEditProfile.setOnClickListener(this);
+
+        final TextView nickName = (TextView) findViewById(R.id.nick_name);
+        final TextView description = (TextView) findViewById(R.id.description);
         //ImageView photo = (ImageView) findViewById(R.id.photo);
         myApp = (MyApplication)this.getApplication();
 
-        //test
-        nickName.setText(myApp.userName);
-        description.setText("I like travelling and making friends!");
 
-
-
-        final String request_url = myApp.back_end + "android/view_profile?user_id="+myApp.userName;
+        final String request_url = myApp.back_end + "android/view_profile?query_id="+myApp.userName + "&user_id=" + myApp.userName;
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.get(request_url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
-//                final ArrayList<String> photoUrls = new ArrayList<String>();
-//                final ArrayList<String> userIds = new ArrayList<String>();
-
                 try {
                     JSONObject jObject = new JSONObject(new String(response));
-//                    JSONArray displayPhotos = jObject.getJSONArray("friendPhotos");
-//                    JSONArray displayNames = jObject.getJSONArray("friendNames");
-                    String imageUrl = "http://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg";
+
+                    if (jObject.getBoolean("isSelf")){
+                        System.out.println("it is my self");
+                        mEditProfile.setOnClickListener(listener);
+                        mEditProfile.setVisibility(View.VISIBLE);
+                        mEditProfile.setEnabled(true);
+                        mEditProfile.setClickable(true);
+                    }
+                    //text
+                    nickName.setText(jObject.getString("name"));
+                    description.setText(jObject.getString("description"));
+                    String imageUrl = jObject.getString("photo");
                     new GetImage().execute(imageUrl);
 
                 }
@@ -89,8 +99,8 @@ public class ViewProfile extends ActionBarActivity {
             try {
                 try{
                     System.out.println("to Bitmapfactory, url is " + imageUrl[0]);
-                    String fake = "http://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg";
-                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(fake).getContent());
+                    //String fake = "http://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg";
+                    Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(imageUrl[0]).getContent());
                     return bitmap;
                 }catch (MalformedURLException e){
                     e.printStackTrace();
@@ -109,6 +119,26 @@ public class ViewProfile extends ActionBarActivity {
         protected void onPostExecute(Bitmap result) {
             ImageView photo = (ImageView) findViewById(R.id.photo);
             photo.setImageBitmap(result);
+        }
+
+    }
+
+    @Override
+    public void onClick(View v){
+        if (!myApp.mGoogleApiClient.isConnecting()) {
+            // We only process button clicks when GoogleApiClient is not transitioning
+            // between connected and not connected.
+//            if (!isOnline()) {
+//                Toast.makeText(getApplicationContext(),
+//                        "You need internet access to perform this action.", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+            switch (v.getId()) {
+                case R.id.edit_profile:
+                    Intent editProfileIntent = new Intent(context, EditProfile.class);
+                    startActivity(editProfileIntent);
+                    break;
+            }
         }
 
     }

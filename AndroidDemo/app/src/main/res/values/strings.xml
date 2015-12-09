@@ -46,6 +46,7 @@
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_view_friends">ViewFriends</string>
     <string name="title_activity_view_profile">ViewProfile</string>
+    <string name="title_activity_edit_profile">EditProfile</string>
 
 
 </resources>

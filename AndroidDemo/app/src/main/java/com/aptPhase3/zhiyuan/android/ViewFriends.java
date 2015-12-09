@@ -40,7 +40,6 @@ public class ViewFriends extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friends);
         final ListView listview1 = (ListView) findViewById(R.id.listView);
-        //final ListView listview2 = (ListView) findViewById(R.id.listView2);
         myApp = (MyApplication)this.getApplication();
         final String request_url = myApp.back_end + "android/view_friends?user_id="+myApp.userName;
         AsyncHttpClient httpClient = new AsyncHttpClient();
