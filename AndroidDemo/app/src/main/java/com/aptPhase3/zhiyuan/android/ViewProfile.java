@@ -48,15 +48,17 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
         setContentView(R.layout.activity_view_profile);
         listener = this;
         mEditProfile = (Button) findViewById(R.id.edit_profile);
+        mEditProfile.setVisibility(View.INVISIBLE);
         //mEditProfile.setOnClickListener(this);
 
         final TextView nickName = (TextView) findViewById(R.id.nick_name);
         final TextView description = (TextView) findViewById(R.id.description);
         //ImageView photo = (ImageView) findViewById(R.id.photo);
         myApp = (MyApplication)this.getApplication();
+        Bundle extras = getIntent().getExtras();
+        String queryId = extras.getString("userId");
 
-
-        final String request_url = myApp.back_end + "android/view_profile?query_id="+myApp.userName + "&user_id=" + myApp.userName;
+        final String request_url = myApp.back_end + "android/view_profile?query_id="+queryId + "&user_id=" + myApp.userName;
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.get(request_url, new AsyncHttpResponseHandler() {
             @Override

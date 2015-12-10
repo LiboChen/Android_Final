@@ -18,12 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-//import android.widget.ProgressBar;
-//import android.widget.SimpleCursorAdapter;
-//import android.view.ViewGroup;
-//import android.view.Gravity;
-//import android.database.Cursor;
-//import android.app.LoaderManager;
 
 import android.widget.ListView;
 import android.widget.AdapterView;
@@ -48,7 +42,7 @@ public class ViewFriends extends ActionBarActivity{
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                 final ArrayList<String> photoUrls = new ArrayList<String>();
                 final ArrayList<String> userIds = new ArrayList<String>();
-
+                final ArrayList<Person> person_data = new ArrayList<Person>();
                 try {
                     JSONObject jObject = new JSONObject(new String(response));
                     JSONArray displayPhotos = jObject.getJSONArray("friendPhotos");
@@ -66,16 +60,23 @@ public class ViewFriends extends ActionBarActivity{
                     userIds.add("angela");
                     userIds.add("henry");
                     userIds.add("david");
-                    //listview1.setAdapter(new ImageAdapter(context, photoUrls));
-                    final ArrayAdapter adapter = new ArrayAdapter(context, R.layout.row_layout, R.id.label, userIds);
+
+                    for(int i = 0; i < userIds.size(); i++){
+                        Person p = new Person(userIds.get(i), photoUrls.get(i));
+                        person_data.add(p);
+                    }
+
+                    final PersonAdapter adapter = new PersonAdapter(context, R.layout.listview_item_row, person_data);
                     listview1.setAdapter(adapter);
 
                     listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                         @Override
-                        public void onItemClick(AdapterView<?> parent, final View view,
-                                                int position, long id) {
-                            //to be implemented
+                        public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
+                            String userId = userIds.get(position);
+                            Intent i = new Intent(getApplicationContext(), ViewProfile.class);
+                            i.putExtra("userId", userId);
+                            startActivity(i);
                         }
 
                     });
@@ -94,66 +95,6 @@ public class ViewFriends extends ActionBarActivity{
         });
     }
 
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_view_friends);
-//
-//        final ListView listview = (ListView) findViewById(R.id.listView2);
-//        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-//                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-//                "Linux", "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux",
-//                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
-//                "Android", "iPhone", "WindowsMobile" };
-//
-//        final ArrayList<String> list = new ArrayList<String>();
-//        for (int i = 0; i < values.length; ++i) {
-//            list.add(values[i]);
-//        }
-//        final StableArrayAdapter adapter = new StableArrayAdapter(this, android.R.layout.simple_list_item_1, list);
-//        listview.setAdapter(adapter);
-//
-//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, final View view,
-//                                    int position, long id) {
-//                final String item = (String) parent.getItemAtPosition(position);
-//                view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                list.remove(item);
-//                                adapter.notifyDataSetChanged();
-//                                view.setAlpha(1);
-//                            }
-//                        });
-//            }
-//
-//        });
-//    }
 
-    private class StableArrayAdapter extends ArrayAdapter<String> {
-
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-        public StableArrayAdapter(Context context, int textViewResourceId,
-                                  List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
-        }
-
-        @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-    }
 
 }

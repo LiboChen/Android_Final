@@ -43,7 +43,7 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        Picasso.with(mContext).load(imageURLs.get(position)).into(imageView);
+        Picasso.with(mContext).load(imageURLs.get(position)).fit().into(imageView);
         return imageView;
     }
 

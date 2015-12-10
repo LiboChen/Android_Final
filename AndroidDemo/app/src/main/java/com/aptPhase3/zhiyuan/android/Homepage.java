@@ -246,6 +246,7 @@ public class Homepage extends ActionBarActivity implements
                     break;
                 case R.id.view_my_profile:
                     Intent viewProfileIntent = new Intent(context, ViewProfile.class);
+                    viewProfileIntent.putExtra("userId", myApp.userName);
                     startActivity(viewProfileIntent);
                     break;
             }

@@ -42,6 +42,7 @@ public class EditProfile extends ActionBarActivity {
                             @Override
                             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                                 Intent i = new Intent(context, ViewProfile.class);
+                                i.putExtra("userId", myApp.userName);
                                 startActivity(i);
                             }
 
