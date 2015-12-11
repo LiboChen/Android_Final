@@ -162,6 +162,7 @@ public class ImageUpload extends ActionBarActivity implements
     public void onConnected(Bundle connectionHint){
         System.out.println("upload onConnected method called!!!!!!!!!!");
         String request_url=myApp.back_end+"android/upload_image?stream_id="+stream_id;
+        request_url = request_url.replace(" ", "%20");
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 geoClient);
         if(mLastLocation!=null){
@@ -172,8 +173,10 @@ public class ImageUpload extends ActionBarActivity implements
         }else{
             Toast.makeText(context, "Failed to retrieve location", Toast.LENGTH_SHORT).show();
         }
-        System.out.println(request_url);
+        System.out.println("before, " + request_url);
+        request_url = request_url.replace(" ", "%20");
         RequestParams params = new RequestParams();
+        System.out.println("after, " + request_url);
         params.put("files",new ByteArrayInputStream(encodedImage));
         params.put("photoCaption",photoCaption);
         AsyncHttpClient client = new AsyncHttpClient();
@@ -194,6 +197,7 @@ public class ImageUpload extends ActionBarActivity implements
         AsyncHttpClient httpClient = new AsyncHttpClient();
 
         String request_url=myApp.back_end+"android/upload_image?stream_id="+stream_id;
+        request_url = request_url.replace(" ", "%20");
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 myApp.mGoogleApiClient);
         if(mLastLocation!=null){

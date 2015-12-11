@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.aptdemo.yzhao.androiddemo.R;
@@ -50,6 +51,11 @@ public class ViewAStreamActivity extends ActionBarActivity implements Connection
         myApp = (MyApplication)this.getApplication();
         Bundle extras = getIntent().getExtras();
         stream_id = extras.getString("stream_id");
+
+        //show stream name
+        TextView title = (TextView) findViewById(R.id.textView);
+        title.setText(stream_id);
+
         // set clickable
         uploadButton = (Button) findViewById(R.id.upload_button);
 

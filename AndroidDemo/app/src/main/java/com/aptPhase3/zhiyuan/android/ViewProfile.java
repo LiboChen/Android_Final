@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -35,7 +36,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-public class ViewProfile extends ActionBarActivity implements View.OnClickListener {
+public class ViewProfile extends ActionBarActivity implements View.OnClickListener{
     Context context = this;
     private String TAG  = "View Profile";
     protected MyApplication myApp;
@@ -53,6 +54,7 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
 
         final TextView nickName = (TextView) findViewById(R.id.nick_name);
         final TextView description = (TextView) findViewById(R.id.description);
+        final ListView listview = (ListView) findViewById(R.id.listViewStream);
         //ImageView photo = (ImageView) findViewById(R.id.photo);
         myApp = (MyApplication)this.getApplication();
         Bundle extras = getIntent().getExtras();
@@ -65,6 +67,19 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
             public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                 try {
                     JSONObject jObject = new JSONObject(new String(response));
+                    JSONArray jstreamNames = jObject.getJSONArray("streamNames");
+                    JSONArray jstreamInfos = jObject.getJSONArray("streamInfos");
+                    JSONArray jstreamCovers = jObject.getJSONArray("streamCovers");
+                    final ArrayList<String> streamNames = new ArrayList<String>();
+                    final ArrayList<String> streamInfos = new ArrayList<String>();
+                    final ArrayList<String> streamCovers = new ArrayList<String>();
+
+                    for(int i = 0; i < jstreamNames.length(); i++){
+                        streamNames.add(jstreamNames.getString(i));
+                        streamInfos.add(jstreamInfos.getString(i));
+                        streamCovers.add(jstreamCovers.getString(i));
+                    }
+
 
                     if (jObject.getBoolean("isSelf")){
                         System.out.println("it is my self");
@@ -73,11 +88,33 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
                         mEditProfile.setEnabled(true);
                         mEditProfile.setClickable(true);
                     }
-                    //text
+                    //show personal information
                     nickName.setText(jObject.getString("name"));
                     description.setText(jObject.getString("description"));
                     String imageUrl = jObject.getString("photo");
                     new GetImage().execute(imageUrl);
+
+                    //show personal place of interest
+                    //String fake = "http://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg";
+
+
+                    ArrayList<Stream> stream_data = new ArrayList<Stream>();
+                    for(int i = 0; i < streamNames.size(); i++){
+                        Stream stream = new Stream(streamNames.get(i), streamInfos.get(i), streamCovers.get(i));
+                        stream_data.add(stream);
+                    }
+                    final StreamAdapter adapter = new StreamAdapter(context, R.layout.listview_stream_row, stream_data);
+                    listview.setAdapter(adapter);
+                    listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, final View view, int position, long id){
+                            String streamName = streamNames.get(position);
+                            Intent i = new Intent(getApplicationContext(), ViewAStreamActivity.class);
+                            i.putExtra("stream_id", streamName);
+                            startActivity(i);
+                        }
+                    });
 
                 }
                 catch(JSONException j){

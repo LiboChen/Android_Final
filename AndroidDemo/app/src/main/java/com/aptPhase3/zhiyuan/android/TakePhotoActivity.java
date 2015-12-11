@@ -151,6 +151,7 @@ public class TakePhotoActivity extends ActionBarActivity implements SurfaceHolde
     public void onConnected(Bundle connectionHint){
         AsyncHttpClient httpClient = new AsyncHttpClient();
         String request_url=myApp.back_end+"android/upload_image?stream_id="+streamId;
+        request_url = request_url.replace(" ", "%20");
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 geoClient);
         if(mLastLocation!=null){
