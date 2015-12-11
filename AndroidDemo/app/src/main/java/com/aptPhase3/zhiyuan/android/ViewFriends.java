@@ -22,8 +22,9 @@ import java.util.List;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 
-public class ViewFriends extends ActionBarActivity{
+public class ViewFriends extends ActionBarActivity implements View.OnClickListener{
     Context context = this;
     private String TAG  = "Display Friends";
     protected MyApplication myApp;
@@ -93,6 +94,26 @@ public class ViewFriends extends ActionBarActivity{
                 Log.e(TAG, "There was a problem in retrieving the url : " + e.toString());
             }
         });
+    }
+
+    @Override
+    public void onClick(View v){
+        if (!myApp.mGoogleApiClient.isConnecting()) {
+            // We only process button clicks when GoogleApiClient is not transitioning
+            // between connected and not connected.
+//            if (!isOnline()) {
+//                Toast.makeText(getApplicationContext(),
+//                        "You need internet access to perform this action.", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+            switch (v.getId()) {
+                case R.id.buttonAddFriend:
+                    Intent i = new Intent(context, AddFriend.class);
+                    startActivity(i);
+                    break;
+            }
+        }
+
     }
 
 

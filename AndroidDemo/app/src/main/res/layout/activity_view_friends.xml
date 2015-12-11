@@ -26,12 +26,12 @@
                 android:layout_weight="0.5"
                 android:gravity="center_horizontal" />
 
-            <ImageView
+            <Button
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:id="@+id/imageView2"
-                android:layout_weight="0.5"
-                android:src="@drawable/ic_plusone_tall_off_client" />
+                android:layout_height="wrap_content"
+                android:text="Add Friend"
+                android:id="@+id/buttonAddFriend" />
+
         </LinearLayout>
 
         <LinearLayout
