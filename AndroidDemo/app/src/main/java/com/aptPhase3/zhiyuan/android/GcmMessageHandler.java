@@ -20,7 +20,8 @@ public class GcmMessageHandler extends GcmListenerService {
         createNotification(from, message);
         System.out.println("I receive my message: " + message);
         Intent chatIntent = new Intent(context, ChatActivity.class);
-        
+        chatIntent.putExtra("receivedMessage", message);
+        chatIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(chatIntent);
     }
 

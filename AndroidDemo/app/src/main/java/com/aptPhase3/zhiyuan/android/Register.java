@@ -1,5 +1,19 @@
 package com.aptPhase3.zhiyuan.android;
 
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+
+//public class Register extends ActionBarActivity {
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_register);
+//    }
+//
+//}
+
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +39,11 @@ import org.apache.http.Header;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ChatActivity extends ActionBarActivity implements
-         View.OnClickListener {
+public class Register extends ActionBarActivity implements
+        View.OnClickListener {
 
     private Button testButton;
     Context context = this;
-    private String register_id;
     protected MyApplication myApp;
     private Activity activity = this;
 
@@ -43,31 +56,19 @@ public class ChatActivity extends ActionBarActivity implements
     private GoogleCloudMessaging gcm =null;
     private String regid = null;
 
-    //static private ArrayList<String> messageHistory = new ArrayList<>();
-
     private GCMClientManager pushClientManager;
     String PROJECT_NUMBER = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_register);
 
         testButton = (Button) findViewById(R.id.registerButton);
         testButton.setOnClickListener(this);
 
-        //show message received
-        final TextView messageText = (TextView) findViewById(R.id.show_message);
-        Bundle extras = getIntent().getExtras();
-        String message = extras.getString("receivedMessage");
-        //messageHistory.add(message);
-//        String totalMessage = "";
-//        for(int i = 0; i < messageHistory.size(); i++)
-//            totalMessage += messageHistory.get(i) + " + ";
-        messageText.setText(message);
-
         gcm = GoogleCloudMessaging.getInstance(this);
-
+        System.out.println("in resigter create funct");
         new Thread(new Runnable() {
             public void run() {
                 newRegister();
@@ -77,12 +78,12 @@ public class ChatActivity extends ActionBarActivity implements
 
     @Override
     public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.registerButton:
-                    System.out.println("register button clicked");
-                    sendRegisterId();
-                    break;
-            }
+        switch (v.getId()) {
+            case R.id.registerButton:
+                System.out.println("register button clicked");
+                sendRegisterId();
+                break;
+        }
     }
 
     private void newRegister() {
@@ -105,14 +106,9 @@ public class ChatActivity extends ActionBarActivity implements
 
     private void sendRegisterId(){
         if(regid!=null) {
-            final EditText mEdit = (EditText) findViewById(R.id.sendMessage);
-            String message = mEdit.getText().toString();
-            //messageHistory.add(message);
-            String request_url = myApp.back_end + "android/send_message?";
+            String request_url = myApp.back_end + "android/register?";
             request_url += "user_id="+myApp.userName;
             request_url += "&reg_id="+regid;
-            request_url += "&message=" + message;
-
             request_url = request_url.replace(" ", "%20");
             AsyncHttpClient client = new AsyncHttpClient();
             client.post(request_url, null, new AsyncHttpResponseHandler() {
@@ -137,3 +133,4 @@ public class ChatActivity extends ActionBarActivity implements
     }
 
 }
+

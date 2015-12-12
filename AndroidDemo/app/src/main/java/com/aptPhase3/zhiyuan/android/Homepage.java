@@ -236,10 +236,6 @@ public class Homepage extends ActionBarActivity implements
                     Intent poiIntent = new Intent(context, CreatePOIActivity.class);
                     startActivity(poiIntent);
                     break;
-                case R.id.buttonRegister:
-                    Intent registerIntent = new Intent(context, ChatActivity.class);
-                    startActivity(registerIntent);
-                    break;
                 case R.id.view_my_frineds:
                     Intent viewFriendIntent = new Intent(context, ViewFriends.class);
                     startActivity(viewFriendIntent);
@@ -248,6 +244,10 @@ public class Homepage extends ActionBarActivity implements
                     Intent viewProfileIntent = new Intent(context, ViewProfile.class);
                     viewProfileIntent.putExtra("userId", myApp.userName);
                     startActivity(viewProfileIntent);
+                    break;
+                case R.id.buttonRegister:
+                    Intent registerIntent = new Intent(context, Register.class);
+                    startActivity(registerIntent);
                     break;
             }
         }

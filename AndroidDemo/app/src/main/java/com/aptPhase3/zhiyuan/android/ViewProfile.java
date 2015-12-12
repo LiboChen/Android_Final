@@ -190,6 +190,7 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
                     break;
                 case R.id.chat:
                     Intent chatIntent = new Intent(context, ChatActivity.class);
+                    chatIntent.putExtra("receivedMessage", "");
                     startActivity(chatIntent);
                     break;
             }

@@ -48,6 +48,7 @@
     <string name="title_activity_view_profile">ViewProfile</string>
     <string name="title_activity_edit_profile">EditProfile</string>
     <string name="title_activity_add_friend">AddFriend</string>
+    <string name="title_activity_register">Register</string>
 
 
 </resources>
