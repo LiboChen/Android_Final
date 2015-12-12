@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class DisplayImages extends ActionBarActivity {
     Context context = this;
-    private String TAG  = "Display Images";
+    private String TAG  = "View All Places of Interest";
     protected MyApplication myApp;
 
     @Override

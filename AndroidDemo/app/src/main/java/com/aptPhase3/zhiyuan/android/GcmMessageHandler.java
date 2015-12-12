@@ -6,17 +6,22 @@ package com.aptPhase3.zhiyuan.android;
 import com.google.android.gms.gcm.GcmListenerService;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 public class GcmMessageHandler extends GcmListenerService {
     public static final int MESSAGE_NOTIFICATION_ID = 435345;
+    Context context = this;
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
         createNotification(from, message);
-        System.out.println(message);
+        System.out.println("I receive my message: " + message);
+        Intent chatIntent = new Intent(context, ChatActivity.class);
+        
+        startActivity(chatIntent);
     }
 
     // Creates notification based on title and body received

@@ -28,7 +28,7 @@ public class AddFriend extends ActionBarActivity {
                     @Override
                     public void onClick(View v) {
                         String friend_name = friendNameText.getText().toString();
-                        String request_url = myApp.back_end + "android/add_friend?nick_name=" + friend_name;
+                        String request_url = myApp.back_end + "android/add_friend?friend_name=" + friend_name;
                         request_url += "&user_id=" + myApp.userName;
                         AsyncHttpClient httpClient = new AsyncHttpClient();
                         httpClient.get(request_url, new AsyncHttpResponseHandler() {

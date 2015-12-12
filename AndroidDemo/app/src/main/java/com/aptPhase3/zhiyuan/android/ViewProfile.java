@@ -42,6 +42,7 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
     protected MyApplication myApp;
     private View.OnClickListener listener;
     private Button mEditProfile;
+    private Button mChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,9 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
         setContentView(R.layout.activity_view_profile);
         listener = this;
         mEditProfile = (Button) findViewById(R.id.edit_profile);
+        mChat = (Button) findViewById(R.id.chat);
         mEditProfile.setVisibility(View.INVISIBLE);
+        mChat.setVisibility(View.INVISIBLE);
         //mEditProfile.setOnClickListener(this);
 
         final TextView nickName = (TextView) findViewById(R.id.nick_name);
@@ -88,6 +91,14 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
                         mEditProfile.setEnabled(true);
                         mEditProfile.setClickable(true);
                     }
+
+                    else{
+                        mChat.setOnClickListener(listener);
+                        mChat.setVisibility(View.VISIBLE);
+                        mChat.setEnabled(true);
+                        mChat.setClickable(true);
+                    }
+
                     //show personal information
                     nickName.setText(jObject.getString("name"));
                     description.setText(jObject.getString("description"));
@@ -176,6 +187,10 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
                 case R.id.edit_profile:
                     Intent editProfileIntent = new Intent(context, EditProfile.class);
                     startActivity(editProfileIntent);
+                    break;
+                case R.id.chat:
+                    Intent chatIntent = new Intent(context, ChatActivity.class);
+                    startActivity(chatIntent);
                     break;
             }
         }

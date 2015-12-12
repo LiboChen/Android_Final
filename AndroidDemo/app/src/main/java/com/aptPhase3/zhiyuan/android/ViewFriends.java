@@ -29,12 +29,15 @@ public class ViewFriends extends ActionBarActivity implements View.OnClickListen
     private String TAG  = "Display Friends";
     protected MyApplication myApp;
     private View.OnClickListener listener;
+    private Button addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friends);
         final ListView listview1 = (ListView) findViewById(R.id.listView);
+        addButton = (Button) findViewById(R.id.buttonAddFriend);
+        addButton.setOnClickListener(this);
         myApp = (MyApplication)this.getApplication();
         final String request_url = myApp.back_end + "android/view_friends?user_id="+myApp.userName;
         AsyncHttpClient httpClient = new AsyncHttpClient();
@@ -54,13 +57,13 @@ public class ViewFriends extends ActionBarActivity implements View.OnClickListen
                         userIds.add(displayNames.getString(i));
                         System.out.println(displayNames.getString(i));
                     }
-                    photoUrls.add(displayPhotos.getString(0));
-                    photoUrls.add(displayPhotos.getString(0));
-                    photoUrls.add(displayPhotos.getString(0));
+//                    photoUrls.add(displayPhotos.getString(0));
+//                    photoUrls.add(displayPhotos.getString(0));
+//                    photoUrls.add(displayPhotos.getString(0));
                     System.out.println("image url is " + displayPhotos.getString(0));
-                    userIds.add("angela");
-                    userIds.add("henry");
-                    userIds.add("david");
+//                    userIds.add("angela");
+//                    userIds.add("henry");
+//                    userIds.add("david");
 
                     for(int i = 0; i < userIds.size(); i++){
                         Person p = new Person(userIds.get(i), photoUrls.get(i));
@@ -108,6 +111,7 @@ public class ViewFriends extends ActionBarActivity implements View.OnClickListen
 //            }
             switch (v.getId()) {
                 case R.id.buttonAddFriend:
+                    System.out.println("i am in where you want");
                     Intent i = new Intent(context, AddFriend.class);
                     startActivity(i);
                     break;
