@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +24,7 @@ import com.google.android.gms.iid.InstanceID;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
 
@@ -82,7 +87,13 @@ public class ChatActivity extends ActionBarActivity implements
         }
 
         ListView listview = (ListView)findViewById(R.id.listViewMessage);
-        final MessageAdapter adapter = new MessageAdapter(context, R.layout.listview_chat_row1, message_data);
+        final MessageAdapter adapter = new MessageAdapter();
+        for(int i = 0; i < message_data.size(); i++){
+            adapter.addItem(message_data.get(i));
+        }
+        myApp = (MyApplication) this.getApplication();
+        adapter.setFlagUser(myApp.userName);
+
         listview.setAdapter(adapter);
 
         gcm = GoogleCloudMessaging.getInstance(this);
@@ -177,4 +188,127 @@ public class ChatActivity extends ActionBarActivity implements
         }
     }
 
+    private class MessageAdapter extends BaseAdapter {
+        int layoutResourceId;
+        private LayoutInflater mInflater;
+        protected MyApplication myApp;
+        private ArrayList<Message> mData = new ArrayList<>();
+        private String flagUser;
+
+        private static final int TYEP_LEFT = 0;
+        private static final int TYPE_RIGHT = 1;
+
+//    public MessageAdapter(Context context, int layoutResourceId, ArrayList<Message> data){
+//        super(context, layoutResourceId, data);
+//        this.layoutResourceId = layoutResourceId;
+//        this.context = context;
+//        this.data = data;
+//    }
+
+        public MessageAdapter() {
+            mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
+        public void setFlagUser(String s) {
+            flagUser = s;
+        }
+
+        @Override
+        public Message getItem(int position) {
+            return mData.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public int getCount() {
+            return mData.size();
+        }
+
+        public void addItem(final Message item) {
+            mData.add(item);
+            notifyDataSetChanged();
+        }
+
+        public int getType(String speaker) {
+            System.out.println("speaker is " + speaker);
+            System.out.println("user is " + flagUser);
+            if (speaker.equals(flagUser))
+                return TYPE_RIGHT;
+            else
+                return TYEP_LEFT;
+        }
+
+
+//        public View getView(int position, View convertView, ViewGroup parent){
+//            View row = convertView;
+//            MessageHolder holder = null;
+//
+//            if(row == null){
+////                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+////                row = inflater.inflate(layoutResourceId, parent, false);
+//
+//                holder = new MessageHolder();
+//                int type = getType(mData.get(position).name);
+//                switch (type){
+//                    case TYEP_LEFT:
+//                        row = mInflater.inflate(R.layout.listview_chat_row, null);
+//                        System.out.println("using left!!!!!!!!! " + "message is " + mData.get(position).content);
+//                        break;
+//                    case TYPE_RIGHT:
+//                        row = mInflater.inflate(R.layout.listview_chat_row1, null);
+//                        System.out.println("using right!!!!!!!! " + "message is " + mData.get(position).content);
+//                        break;
+//                }
+//                holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
+//                holder.displayName = (TextView)row.findViewById(R.id.displayName);
+//                holder.displayMessage =  (TextView) row.findViewById(R.id.displayMessage);
+//
+//                row.setTag(holder);
+//            }
+//            else{
+//                holder = (MessageHolder)row.getTag();
+//            }
+//
+//            Message message = mData.get(position);
+//            holder.displayName.setText(message.name);
+//            holder.displayMessage.setText(message.content);
+//            Picasso.with(context).load(message.photo).resize(140, 140).centerInside().into(holder.imgIcon);
+//            return row;
+//        }
+//
+//        public static class MessageHolder{
+//            ImageView imgIcon;
+//            TextView displayName;
+//            TextView displayMessage;
+//        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View row = convertView;
+
+            int type = getType(mData.get(position).name);
+            switch (type) {
+                case TYEP_LEFT:
+                    row = mInflater.inflate(R.layout.listview_chat_row, null);
+                    System.out.println("using left!!!!!!!!! " + "message is " + mData.get(position).content);
+                    break;
+                case TYPE_RIGHT:
+                    row = mInflater.inflate(R.layout.listview_chat_row1, null);
+                    System.out.println("using right!!!!!!!! " + "message is " + mData.get(position).content);
+                    break;
+            }
+            ImageView mimgIcon = (ImageView) row.findViewById(R.id.imgIcon);
+            TextView mdisplayName = (TextView) row.findViewById(R.id.displayName);
+            TextView mdisplayMessage = (TextView) row.findViewById(R.id.displayMessage);
+            Message message = mData.get(position);
+            mdisplayName.setText(message.name);
+            mdisplayMessage.setText(message.content);
+            Picasso.with(context).load(message.photo).resize(140, 140).centerInside().into(mimgIcon);
+            return row;
+
+        }
+    }
 }
