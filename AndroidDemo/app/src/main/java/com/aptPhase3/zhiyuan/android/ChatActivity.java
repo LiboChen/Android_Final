@@ -94,6 +94,7 @@ public class ChatActivity extends ActionBarActivity implements
         myApp = (MyApplication) this.getApplication();
         adapter.setFlagUser(myApp.userName);
 
+        listview.setDivider(null);
         listview.setAdapter(adapter);
 
         gcm = GoogleCloudMessaging.getInstance(this);
@@ -306,7 +307,7 @@ public class ChatActivity extends ActionBarActivity implements
             Message message = mData.get(position);
             mdisplayName.setText(message.name);
             mdisplayMessage.setText(message.content);
-            Picasso.with(context).load(message.photo).resize(140, 140).centerInside().into(mimgIcon);
+            Picasso.with(context).load(message.photo).resize(100, 100).centerInside().into(mimgIcon);
             return row;
 
         }

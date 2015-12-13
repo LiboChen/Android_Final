@@ -61,48 +61,54 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:text="View my profile"
+            android:textColor="#FFFFFF"
             android:clickable="false"
             android:id="@+id/view_my_profile"
-            android:layout_weight="2.45" />
+            android:layout_weight="2.45"
+            android:background="@drawable/buttonshape"/>
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:text="Create Place of Interest"
+            android:textColor="#FFFFFF"
             android:clickable="false"
             android:id="@+id/createPOI"
-            android:layout_weight="2.45" />
-
-        <Button
-            android:id="@+id/view_all_images"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/imagePage"
-            android:onClick="viewAllImages"
-            />
+            android:layout_weight="2.45"
+            android:background="@drawable/buttonshape"
+            android:layout_marginTop="10dp" />
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:text="View Nearby Sreams"
+            android:textColor="#FFFFFF"
             android:clickable="false"
-            android:id="@+id/View_Nearby"/>
+            android:id="@+id/View_Nearby"
+            android:background="@drawable/buttonshape"
+            android:layout_marginTop="10dp" />
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:text="View My Friends"
+            android:textColor="#FFFFFF"
             android:id="@+id/view_my_frineds"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttonshape"
+            android:layout_marginTop="10dp" />
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:text="Register For Chat!"
+            android:textColor="#FFFFFF"
             android:id="@+id/buttonRegister"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/buttonshape"
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
 </ScrollView>

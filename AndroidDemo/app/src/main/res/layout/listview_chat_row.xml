@@ -43,11 +43,12 @@
         android:layout_height="wrap_content"
         android:textSize="16dp"
         android:text="New Text"
+        android:background="@android:color/holo_blue_light"
         android:id="@+id/displayMessage"
         android:maxWidth="200dp"
         android:layout_weight="2"
         android:gravity="left"
         android:layout_gravity="left"
-        android:layout_marginLeft="100dp" />
+        android:layout_marginLeft="80dp" />
 
 </RelativeLayout>

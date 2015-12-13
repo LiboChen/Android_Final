@@ -28,15 +28,20 @@ public class EditProfile extends ActionBarActivity {
         Button submitButton = (Button) findViewById(R.id.buttonSubmit);
         final EditText nickNameText   = (EditText)findViewById(R.id.nickName);
         final EditText descriptionText = (EditText) findViewById(R.id.description);
+        final EditText photoText = (EditText)findViewById(R.id.photoUrl);
         submitButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String nick_name = nickNameText.getText().toString();
                         String description = descriptionText.getText().toString();
+                        String photo = photoText.getText().toString();
                         String request_url = myApp.back_end + "android/edit_profile?nick_name="+nick_name;
                         request_url += "&description=" + description;
                         request_url += "&user_id=" + myApp.userName;
+                        request_url += "&photo_url=" + photo;
+                        System.out.println("photo url is " + photo);
+                        request_url = request_url.replace(" ","%20");
                         AsyncHttpClient httpClient = new AsyncHttpClient();
                         httpClient.get(request_url, new AsyncHttpResponseHandler() {
                             @Override

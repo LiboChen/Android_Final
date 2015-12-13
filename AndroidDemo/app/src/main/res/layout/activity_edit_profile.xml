@@ -16,18 +16,29 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:text="Add a nick name for yourself!"
-        android:layout_marginTop="130dp" />
+        android:layout_marginTop="100dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/description"
-        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="Add some description about yourself!" />
+        android:text="Add some description about yourself!"
+        android:layout_marginTop="175dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/photoUrl"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Add a photo for yourself!"
+        android:layout_marginTop="250dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -36,6 +47,7 @@
         android:id="@+id/buttonSubmit"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="126dp" />
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/but_green"/>
 
 </RelativeLayout>
