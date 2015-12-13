@@ -82,7 +82,7 @@ public class ChatActivity extends ActionBarActivity implements
         }
 
         ListView listview = (ListView)findViewById(R.id.listViewMessage);
-        final MessageAdapter adapter = new MessageAdapter(context, R.layout.listview_chat_row, message_data);
+        final MessageAdapter adapter = new MessageAdapter(context, R.layout.listview_chat_row1, message_data);
         listview.setAdapter(adapter);
 
         gcm = GoogleCloudMessaging.getInstance(this);
