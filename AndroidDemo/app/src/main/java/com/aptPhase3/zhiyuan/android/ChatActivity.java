@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,14 +64,26 @@ public class ChatActivity extends ActionBarActivity implements
         mReceiver.setText(extras.getString("receiver"));
 
         //show message received
-        final TextView messageText = (TextView) findViewById(R.id.show_message);
         message = extras.getString("receivedMessage");
-        messageText.setText(message);
 
         //set my receiver from message encoded message
         String[] infos = message.split("#");
-        mReceiver.setText(infos[infos.length-1]);
+        mReceiver.setText(infos[infos.length - 1]);
         System.out.println("set receiver from my encoded infomation " + infos[infos.length-1]);
+
+        ArrayList<Message> message_data = new ArrayList<>();
+
+        String default_photo = "http://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg";
+        for(int i = 0; i < infos.length - 1; i++){
+            String tmp = infos[i];
+            String[] tmp_info = tmp.split(":");
+            Message m = new Message(tmp_info[0], default_photo, tmp_info[1]);
+            message_data.add(m);
+        }
+
+        ListView listview = (ListView)findViewById(R.id.listViewMessage);
+        final MessageAdapter adapter = new MessageAdapter(context, R.layout.listview_chat_row, message_data);
+        listview.setAdapter(adapter);
 
         gcm = GoogleCloudMessaging.getInstance(this);
 
@@ -89,14 +102,8 @@ public class ChatActivity extends ActionBarActivity implements
                     sendRegisterId();
                     final EditText mEdit = (EditText) findViewById(R.id.sendMessage);
                     String cur_message = mEdit.getText().toString();
-                    final TextView messageText = (TextView) findViewById(R.id.show_message);
 
                     //show newest message
-                    String m = messageText.getText().toString();
-                    System.out.println("before add current message: " + m);
-                    m += "#" + cur_message;
-                    System.out.println("after add current message: " + m);
-                    messageText.setText(m);
                     break;
             }
     }
