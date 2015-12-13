@@ -43,6 +43,7 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
     private View.OnClickListener listener;
     private Button mEditProfile;
     private Button mChat;
+    private String profileOwner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,8 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
         myApp = (MyApplication)this.getApplication();
         Bundle extras = getIntent().getExtras();
         String queryId = extras.getString("userId");
+        profileOwner = queryId;
+        System.out.println("It's the profile of " + profileOwner);
 
         final String request_url = myApp.back_end + "android/view_profile?query_id="+queryId + "&user_id=" + myApp.userName;
         AsyncHttpClient httpClient = new AsyncHttpClient();
@@ -191,6 +194,8 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
                 case R.id.chat:
                     Intent chatIntent = new Intent(context, ChatActivity.class);
                     chatIntent.putExtra("receivedMessage", "");
+                    chatIntent.putExtra("receiver", profileOwner);
+                    chatIntent.putExtra("sender", myApp.userName);
                     startActivity(chatIntent);
                     break;
             }
