@@ -49,6 +49,7 @@
     <string name="title_activity_edit_profile">EditProfile</string>
     <string name="title_activity_add_friend">AddFriend</string>
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_edit_poi">EditPOI</string>
 
 
 </resources>

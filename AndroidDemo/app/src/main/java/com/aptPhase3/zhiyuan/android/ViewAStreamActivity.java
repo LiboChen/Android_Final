@@ -43,6 +43,7 @@ public class ViewAStreamActivity extends ActionBarActivity implements Connection
     private String stream_id;
     private Button uploadButton;
     private Button takePhotoButton;
+    private Button editButton;
     private View.OnClickListener listener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,8 @@ public class ViewAStreamActivity extends ActionBarActivity implements Connection
         takePhotoButton = (Button) findViewById(R.id.TakePhotoButton);
         takePhotoButton.setVisibility(View.INVISIBLE);
 
+        editButton = (Button) findViewById(R.id.edit_button);
+        editButton.setVisibility(View.INVISIBLE);
 
         final String request_url = myApp.back_end +"android/view_single_stream?user_id="+myApp.userName+"&stream_id="+stream_id;
         AsyncHttpClient httpClient = new AsyncHttpClient();
@@ -86,6 +89,11 @@ public class ViewAStreamActivity extends ActionBarActivity implements Connection
                         takePhotoButton.setVisibility(View.VISIBLE);
                         takePhotoButton.setEnabled(true);
                         takePhotoButton.setClickable(true);
+
+                        editButton.setOnClickListener(listener);
+                        editButton.setVisibility(View.VISIBLE);
+                        editButton.setEnabled(true);
+                        editButton.setClickable(true);
                     }
                     JSONArray displayImages = jObject.getJSONArray("displayImages");
 //                    JSONArray displayCaption = jObject.getJSONArray("imageCaptionList");
@@ -160,7 +168,6 @@ public class ViewAStreamActivity extends ActionBarActivity implements Connection
 
     @Override
     public void onClick(View v) {
-
             switch (v.getId()) {
                 case R.id.upload_button:
                     System.out.println("upload_button_clicked");
@@ -173,6 +180,11 @@ public class ViewAStreamActivity extends ActionBarActivity implements Connection
                     Intent photoIntent = new Intent(context, TakePhotoActivity.class);
                     photoIntent.putExtra("stream_id", stream_id);
                     startActivity(photoIntent);
+                    break;
+                case R.id.edit_button:
+                    Intent editIntent = new Intent(context, EditPOI.class);
+                    editIntent.putExtra("stream_id", stream_id);
+                    startActivity(editIntent);
                     break;
             }
     }

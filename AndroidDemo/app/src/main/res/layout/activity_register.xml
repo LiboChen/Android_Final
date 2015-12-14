@@ -8,9 +8,10 @@
     tools:context="com.aptPhase3.zhiyuan.android.Register">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:text="Just click it to register for chatting now!"
+        android:background="@drawable/but_green"
         android:id="@+id/registerButton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />

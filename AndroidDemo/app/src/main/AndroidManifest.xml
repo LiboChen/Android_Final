@@ -118,6 +118,10 @@
             android:name=".Register"
             android:label="@string/title_activity_register" >
         </activity>
+        <activity
+            android:name=".EditPOI"
+            android:label="@string/title_activity_edit_poi" >
+        </activity>
     </application>
 
 </manifest>
