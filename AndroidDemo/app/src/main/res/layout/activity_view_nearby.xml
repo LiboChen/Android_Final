@@ -8,24 +8,29 @@
     tools:context="com.aptPhase3.zhiyuan.android.ViewNearbyActivity">
 
     <TextView
-        android:text="View Nearby Streams"
+        android:text="Nearby Places of Interest"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="40sp"
+        android:textSize="20sp"
         android:paddingBottom = "40sp"
         />
 
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/gridview"
-        android:layout_width="match_parent"
+    <!--<GridView xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/gridview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:columnWidth="90dp"-->
+        <!--android:numColumns="3"-->
+        <!--android:verticalSpacing="10dp"-->
+        <!--android:horizontalSpacing="10dp"-->
+        <!--android:stretchMode="columnWidth"-->
+        <!--android:gravity="center"-->
+        <!--/>-->
+    <ListView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:columnWidth="90dp"
-        android:numColumns="3"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
-        />
+        android:id="@+id/listViewStream"
+        android:layout_marginTop="30dp" />
 
 </LinearLayout>
