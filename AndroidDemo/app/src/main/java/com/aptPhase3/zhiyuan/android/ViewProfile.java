@@ -152,6 +152,7 @@ public class ViewProfile extends ActionBarActivity implements View.OnClickListen
             try {
                 try{
                     System.out.println("to Bitmapfactory, url is " + imageUrl[0]);
+                    imageUrl[0] = imageUrl[0].replace(" ", "%20");
                     //String fake = "http://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg";
                     Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(imageUrl[0]).getContent());
                     return bitmap;

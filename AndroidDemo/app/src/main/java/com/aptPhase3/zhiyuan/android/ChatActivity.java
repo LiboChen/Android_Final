@@ -30,6 +30,7 @@ import org.apache.http.Header;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ChatActivity extends ActionBarActivity implements
          View.OnClickListener {
@@ -78,11 +79,14 @@ public class ChatActivity extends ActionBarActivity implements
 
         ArrayList<Message> message_data = new ArrayList<>();
 
-        String default_photo = "http://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg";
+        //String default_photo = "http://www.wikihow.com/images/f/ff/Draw-a-Cute-Cartoon-Person-Step-14.jpg";
         for(int i = 0; i < infos.length - 1; i++){
             String tmp = infos[i];
-            String[] tmp_info = tmp.split(":");
-            Message m = new Message(tmp_info[0], default_photo, tmp_info[1]);
+            String[] tmp_info = tmp.split(Pattern.quote("$"));
+            System.out.println("i want to see : " + tmp);
+            System.out.println("size is " + tmp_info.length);
+            System.out.println("after split i want to see : " + tmp_info[0]);
+            Message m = new Message(tmp_info[0], tmp_info[1], tmp_info[2], tmp_info[3]);
             message_data.add(m);
         }
 
@@ -244,49 +248,6 @@ public class ChatActivity extends ActionBarActivity implements
         }
 
 
-//        public View getView(int position, View convertView, ViewGroup parent){
-//            View row = convertView;
-//            MessageHolder holder = null;
-//
-//            if(row == null){
-////                LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-////                row = inflater.inflate(layoutResourceId, parent, false);
-//
-//                holder = new MessageHolder();
-//                int type = getType(mData.get(position).name);
-//                switch (type){
-//                    case TYEP_LEFT:
-//                        row = mInflater.inflate(R.layout.listview_chat_row, null);
-//                        System.out.println("using left!!!!!!!!! " + "message is " + mData.get(position).content);
-//                        break;
-//                    case TYPE_RIGHT:
-//                        row = mInflater.inflate(R.layout.listview_chat_row1, null);
-//                        System.out.println("using right!!!!!!!! " + "message is " + mData.get(position).content);
-//                        break;
-//                }
-//                holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
-//                holder.displayName = (TextView)row.findViewById(R.id.displayName);
-//                holder.displayMessage =  (TextView) row.findViewById(R.id.displayMessage);
-//
-//                row.setTag(holder);
-//            }
-//            else{
-//                holder = (MessageHolder)row.getTag();
-//            }
-//
-//            Message message = mData.get(position);
-//            holder.displayName.setText(message.name);
-//            holder.displayMessage.setText(message.content);
-//            Picasso.with(context).load(message.photo).resize(140, 140).centerInside().into(holder.imgIcon);
-//            return row;
-//        }
-//
-//        public static class MessageHolder{
-//            ImageView imgIcon;
-//            TextView displayName;
-//            TextView displayMessage;
-//        }
-
         public View getView(int position, View convertView, ViewGroup parent) {
             View row = convertView;
 
@@ -307,7 +268,7 @@ public class ChatActivity extends ActionBarActivity implements
             Message message = mData.get(position);
             mdisplayName.setText(message.name);
             mdisplayMessage.setText(message.content);
-            Picasso.with(context).load(message.photo).resize(100, 100).centerInside().into(mimgIcon);
+            Picasso.with(context).load(message.photo1).resize(100, 100).centerInside().into(mimgIcon);
             return row;
 
         }
