@@ -14,6 +14,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -26,6 +27,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.location.LocationServices;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.apache.http.Header;
 
 
 public class Homepage extends ActionBarActivity implements
@@ -198,6 +203,27 @@ public class Homepage extends ActionBarActivity implements
                         "You need internet access to perform this action.", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            //set user
+            String request_url = myApp.back_end + "android/create_a_user?user_id=" + myApp.userName;
+            request_url = request_url.replace(" ","%20");
+
+            System.out.println(request_url);
+
+            AsyncHttpClient client = new AsyncHttpClient();
+            client.post(request_url, null, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+                    Log.w("async", "success!!!!");
+//                    Toast.makeText(context, "setting user Successful", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] errorResponse, Throwable e) {
+                    Log.e("setting user", "There was a problem in retrieving the url : " + e.toString());
+                }
+            });
+
             switch (v.getId()) {
                 case R.id.sign_in_button:
                     resolveSignInError();
